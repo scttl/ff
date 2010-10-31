@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+"""
+Small script to pretty print the delimited fields of the first line of a file.
+"""
+import optparse
+import fileinput
+
+def parse_arguments():
+    """initializes and parses command line options."""
+    p = optparse.OptionParser()
+    p.add_option("-d", "--delimiter", dest="delim",
+                 help=r"use DELIMITER as field separator (instead of \t)",
+                 default="\t")
+    p.add_option("-f", "--file", dest="file", 
+                 help="read input from FILENAME (instead of stdin)",
+                 default="-")
+    (opts, args) = p.parse_args()
+    return opts
+
+def print_header(file="-", delim="\t"):
+    ln = fileinput.input(file).readline().rstrip("\n")
+    field_num = 1
+    for field in ln.split(delim):
+        print("%d:\t%s" % (field_num, field))
+        field_num += 1
+
+def main():
+    opts = parse_arguments()
+    print_header(opts.file, opts.delim)
+
+if __name__ == '__main__':
+    main()
