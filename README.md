@@ -1,3 +1,3 @@
-datautils
-=========
-A collection of tools useful for text file manipulation and analysis.
+ff
+==
+A collection of tools for flat file tabular data manipulation and analysis.
